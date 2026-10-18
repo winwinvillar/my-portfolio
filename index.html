@@ -4,133 +4,537 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Portfolio</title>
+  <meta name="theme-color" content="#0b0818">
+  <meta name="description" content="Python Backend/API and Flutter Developer portfolio.">
+  <title>Winwin | Developer Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --bg: #0b0818;
+      --panel: #151027;
+      --text: #f7f4ff;
+      --muted: #b4abc9;
+      --purple: #a78bfa;
+      --blue: #60a5fa;
+      --border: rgba(255,255,255,.11);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1120;
-      color: #e5e7eb;
+      background:
+        radial-gradient(ellipse at 80% 10%, rgba(113,62,204,.19), transparent 40%),
+        radial-gradient(ellipse at 10% 40%, rgba(42,104,201,.12), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
       line-height: 1.7;
     }
+
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .container { width: min(1100px, 90%); margin: auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,8,24,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
     nav {
-      padding: 22px 8%;
+      min-height: 76px;
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid #263244;
+      align-items: center;
+      gap: 20px;
     }
-    nav a, a { color: #67e8f9; text-decoration: none; }
-    main { max-width: 1000px; margin: auto; padding: 60px 24px; }
-    .tag { color: #67e8f9; }
-    h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.15; }
-    h2 { margin-top: 55px; }
-    .intro { max-width: 650px; color: #b6c2d2; }
-    .skills, .projects {
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .logo span, .gradient-text {
+      background: linear-gradient(100deg, var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links { display: flex; gap: 27px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: white; }
+
+    .menu-button {
+      display: none;
+      color: white;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    section { padding: 95px 0; }
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      padding: 85px 0;
+    }
+
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 55px;
     }
-    .card {
-      background: #151f30;
-      border: 1px solid #29374b;
-      border-radius: 12px;
-      padding: 22px;
-    }
-    .button {
+
+    .eyebrow {
       display: inline-block;
-      background: #67e8f9;
-      color: #0b1120;
-      padding: 10px 18px;
-      border-radius: 7px;
-      font-weight: bold;
-      margin-top: 16px;
+      color: #d6c8ff;
+      background: rgba(167,139,250,.1);
+      border: 1px solid rgba(167,139,250,.28);
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: .82rem;
+      margin-bottom: 22px;
     }
-    footer {
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+
+    h1 { font-size: clamp(2.7rem, 5.8vw, 4.8rem); letter-spacing: -3px; }
+    h1 span { display: block; }
+
+    .hero p, .section-description {
+      color: var(--muted);
+      margin-top: 22px;
+      max-width: 590px;
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: linear-gradient(110deg, #9b79f5, #508ff4); color: white; }
+    .btn-secondary { border: 1px solid var(--border); background: rgba(255,255,255,.03); }
+
+    .visual {
+      position: relative;
+      padding: 25px;
+      border: 1px solid rgba(167,139,250,.25);
+      background: linear-gradient(145deg, rgba(34,24,62,.95), rgba(15,15,39,.95));
+      border-radius: 25px;
+      box-shadow: 0 25px 90px rgba(85,55,170,.17);
+      transform: rotate(1deg);
+    }
+
+    .window-bar { display: flex; gap: 7px; margin-bottom: 25px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #a78bfa; }
+    .dot:nth-child(2) { background: #60a5fa; }
+    .dot:nth-child(3) { background: #4ade80; }
+
+    .code { font: .88rem/2 'Courier New', monospace; color: #d9d2f4; overflow-wrap: anywhere; }
+    .code .purple { color: #c4a7ff; }
+    .code .blue { color: #80c5ff; }
+    .code .green { color: #86efac; }
+
+    .floating-badge {
+      position: absolute;
+      right: -18px;
+      bottom: -22px;
+      background: #21173d;
+      border: 1px solid rgba(167,139,250,.35);
+      padding: 12px 16px;
+      border-radius: 13px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.3);
+      font-size: .85rem;
+    }
+
+    .section-heading { margin-bottom: 38px; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -1px; }
+    .section-heading p { color: var(--muted); margin-top: 12px; max-width: 650px; }
+
+    .skills-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(21,16,39,.82);
+      border-radius: 18px;
+      padding: 25px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,.55); }
+
+    .skill-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .card p { color: var(--muted); font-size: .92rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .tag {
+      font-size: .76rem;
+      color: #d9ccff;
+      background: rgba(167,139,250,.1);
+      border: 1px solid rgba(167,139,250,.17);
+      border-radius: 8px;
+      padding: 5px 9px;
+    }
+
+    .project-top {
+      height: 125px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, rgba(135,85,225,.28), rgba(48,120,220,.18));
+      font-size: 2.7rem;
+    }
+
+    .project-link { display: inline-block; margin-top: 18px; color: #b9a3ff; font-weight: 600; font-size: .88rem; }
+    .about-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      padding: 35px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(21,16,39,.65);
+    }
+
+    .about-box p { color: var(--muted); margin-top: 12px; }
+    .about-points { display: grid; gap: 14px; }
+    .about-point { padding: 15px; border-radius: 12px; background: rgba(255,255,255,.035); }
+    .about-point strong { display: block; margin-bottom: 4px; }
+    .about-point span { color: var(--muted); font-size: .88rem; }
+
+    .contact-box {
       text-align: center;
-      padding: 30px;
-      border-top: 1px solid #263244;
-      color: #9ca3af;
+      padding: 50px 25px;
+      border-radius: 24px;
+      border: 1px solid rgba(167,139,250,.25);
+      background: linear-gradient(135deg, rgba(103,58,183,.16), rgba(45,105,190,.12));
+    }
+
+    .contact-box h2 { font-size: clamp(2rem, 4vw, 3rem); }
+    .contact-box p { color: var(--muted); max-width: 600px; margin: 16px auto 0; }
+    .contact-box .actions { justify-content: center; }
+
+    footer { border-top: 1px solid var(--border); padding: 25px 0; color: var(--muted); font-size: .85rem; }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s, transform .6s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 760px) {
+      .menu-button { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        flex-direction: column;
+        gap: 17px;
+        background: #100c20;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .hero { min-height: auto; }
+      .hero-grid, .about-box { grid-template-columns: 1fr; }
+      .hero-grid { gap: 45px; }
+      .visual { max-width: 500px; width: 100%; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 0; }
+      h1 { letter-spacing: -1.7px; }
+      .floating-badge { right: -5px; }
+    }
+
+    @media (min-width: 761px) and (max-width: 950px) {
+      .skills-grid, .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { gap: 28px; }
     }
   </style>
 </head>
+
 <body>
-  <nav>
-    <strong>My Portfolio</strong>
-    <a href="#contact">Contact</a>
-  </nav>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home">WINWIN<span>.DEV</span></a>
+
+      <button class="menu-button" id="menuButton"
+        aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
+        ☰ Menu
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <section>
-      <p class="tag">PYTHON BACKEND & FLUTTER DEVELOPER</p>
-      <h1>Hi, I'm a Developer.</h1>
-      <p class="intro">
-        I build backend APIs and mobile applications using Python,
-        FastAPI, Flutter, and modern development tools. I enjoy
-        creating reliable, practical software solutions.
-      </p>
-      <a class="button" href="#projects">View My Projects</a>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">✦ Python Backend & Flutter Developer</span>
+          <h1>Building digital experiences <span class="gradient-text">that work.</span></h1>
+          <p>
+            Hi, I'm Winwin. I build backend services, REST APIs, and mobile
+            applications with a focus on clean code, reliable functionality,
+            and user-friendly experiences.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Explore My Projects ↗</a>
+            <a class="btn btn-secondary" href="#contact">Get In Touch</a>
+          </div>
+        </div>
+
+        <div class="visual" aria-label="Illustration of Python backend code">
+          <div class="window-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+          <div class="code">
+            <div><span class="purple">from</span> fastapi <span class="purple">import</span> FastAPI</div>
+            <br>
+            <div>app = <span class="blue">FastAPI</span>()</div>
+            <br>
+            <div><span class="purple">@app.get</span>(<span class="green">"/api/hello"</span>)</div>
+            <div><span class="purple">async def</span> <span class="blue">hello</span>():</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="purple">return</span> {</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">"message"</span>: <span class="green">"Hello, world!"</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+            <br>
+            <div><span class="green"># Build. Test. Improve.</span></div>
+          </div>
+          <div class="floating-badge">⚡ APIs · Mobile Apps · Python</div>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Technical Skills</h2>
-      <div class="skills">
-        <div class="card">
-          <h3>Backend Development</h3>
-          <p>Python, FastAPI, REST APIs, Django</p>
+    <section id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>About <span class="gradient-text">Me</span></h2>
+          <p>A developer who enjoys solving problems and turning ideas into useful applications.</p>
         </div>
-        <div class="card">
-          <h3>Mobile Development</h3>
-          <p>Flutter, Dart, cross-platform applications</p>
+
+        <div class="about-box reveal">
+          <div>
+            <h3>Backend logic meets mobile experiences.</h3>
+            <p>
+              My development interests include creating APIs, implementing
+              server-side logic, connecting applications to backend services,
+              and building mobile interfaces with Flutter.
+            </p>
+            <p>
+              I value readable code, testing, debugging, teamwork, and
+              continuous learning. I'm looking for opportunities to contribute
+              to real-world software projects and grow as a developer.
+            </p>
+          </div>
+          <div class="about-points">
+            <div class="about-point">
+              <strong>Backend Development</strong>
+              <span>Python, FastAPI, Django REST Framework</span>
+            </div>
+            <div class="about-point">
+              <strong>Mobile Development</strong>
+              <span>Flutter and API integration</span>
+            </div>
+            <div class="about-point">
+              <strong>Development Workflow</strong>
+              <span>Git, GitHub, testing and debugging</span>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <h3>Tools & Database</h3>
-          <p>Git, GitHub, MySQL, API integration</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Technical <span class="gradient-text">Skills</span></h2>
+          <p>Tools and technologies I work with and continue to develop.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="card reveal">
+            <div class="skill-icon">🐍</div>
+            <h3>Python Backend</h3>
+            <p>Building backend logic and organizing server-side application code.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Django</span></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="skill-icon">🔌</div>
+            <h3>API Development</h3>
+            <p>Creating endpoints and connecting clients with backend services.</p>
+            <div class="tags"><span class="tag">REST APIs</span><span class="tag">JSON</span><span class="tag">HTTP</span></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="skill-icon">📱</div>
+            <h3>Flutter Development</h3>
+            <p>Building mobile interfaces and integrating apps with APIs.</p>
+            <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Mobile UI</span></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="skill-icon">🗄️</div>
+            <h3>Databases</h3>
+            <p>Working with application data and database-backed features.</p>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">MySQL</span></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="skill-icon">🧪</div>
+            <h3>Testing & Debugging</h3>
+            <p>Investigating errors and checking API behavior and responses.</p>
+            <div class="tags"><span class="tag">Postman</span><span class="tag">Debugging</span></div>
+          </article>
+
+          <article class="card reveal">
+            <div class="skill-icon">🌿</div>
+            <h3>Tools & Workflow</h3>
+            <p>Tracking code changes and collaborating through version control.</p>
+            <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Vercel</span></div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <h2>Featured Projects</h2>
-      <div class="projects">
-        <div class="card">
-          <h3>REST API Development</h3>
-          <p>
-            Backend API development, request validation,
-            database operations, and integration.
-          </p>
-          <p class="tag">Python · FastAPI · REST</p>
+      <div class="container">
+        <div class="section-heading reveal">
+          <h2>Featured <span class="gradient-text">Projects</span></h2>
+          <p>Replace these sample cards with your actual projects and repository links.</p>
         </div>
-        <div class="card">
-          <h3>Flutter Mobile App</h3>
-          <p>
-            Cross-platform mobile application development
-            and backend API integration.
-          </p>
-          <p class="tag">Flutter · Dart · APIs</p>
-        </div>
-        <div class="card">
-          <h3>Database-Driven System</h3>
-          <p>
-            Server-side features for managing data,
-            processing requests, and supporting applications.
-          </p>
-          <p class="tag">Python · MySQL</p>
+
+        <div class="projects-grid">
+          <article class="card reveal">
+            <div class="project-top">⚙️</div>
+            <h3>REST API Development</h3>
+            <p>A backend API project focused on endpoints, data handling, and structured responses.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">REST API</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub Project ↗</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="project-top">📲</div>
+            <h3>Flutter Mobile App</h3>
+            <p>A mobile application concept showcasing screens, navigation, and backend integration.</p>
+            <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">API Integration</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub Project ↗</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="project-top">🗃️</div>
+            <h3>Database-Driven App</h3>
+            <p>An application project demonstrating data management and backend business logic.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Backend</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub Project ↗</a>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <h2>Let's Connect</h2>
-      <p>
-        I'm interested in Python Backend/API Developer
-        and Flutter Developer opportunities.
-      </p>
-      <p>GitHub: <a href="https://github.com/">My GitHub Profile</a></p>
-      <p>Email: Replace this with your professional email.</p>
+      <div class="container">
+        <div class="contact-box reveal">
+          <span class="eyebrow">Have a project in mind?</span>
+          <h2>Let's build something <span class="gradient-text">great.</span></h2>
+          <p>
+            I'm open to discussing Python backend, API development,
+            Flutter projects, and suitable developer opportunities.
+          </p>
+          <div class="actions">
+            <!-- Replace the email below with your real email address -->
+            <a class="btn btn-primary" href="mailto:YOUR_EMAIL@example.com">Email Me ↗</a>
+            <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>© 2026 Developer Portfolio</footer>
+  <footer>
+    <div class="container footer-content">
+      <span>© <span id="year"></span> Winwin.dev</span>
+      <span>Built with HTML, CSS & JavaScript.</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(element => {
+      revealObserver.observe(element);
+    });
+  </script>
 </body>
 </html>
