@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1120;
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
+    nav {
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #263244;
+    }
+    nav a, a { color: #67e8f9; text-decoration: none; }
+    main { max-width: 1000px; margin: auto; padding: 60px 24px; }
+    .tag { color: #67e8f9; }
+    h1 { font-size: clamp(36px, 7vw, 64px); line-height: 1.15; }
+    h2 { margin-top: 55px; }
+    .intro { max-width: 650px; color: #b6c2d2; }
+    .skills, .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #151f30;
+      border: 1px solid #29374b;
+      border-radius: 12px;
+      padding: 22px;
+    }
+    .button {
+      display: inline-block;
+      background: #67e8f9;
+      color: #0b1120;
+      padding: 10px 18px;
+      border-radius: 7px;
+      font-weight: bold;
+      margin-top: 16px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #263244;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <strong>My Portfolio</strong>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <p class="tag">PYTHON BACKEND & FLUTTER DEVELOPER</p>
+      <h1>Hi, I'm a Developer.</h1>
+      <p class="intro">
+        I build backend APIs and mobile applications using Python,
+        FastAPI, Flutter, and modern development tools. I enjoy
+        creating reliable, practical software solutions.
+      </p>
+      <a class="button" href="#projects">View My Projects</a>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skills">
+        <div class="card">
+          <h3>Backend Development</h3>
+          <p>Python, FastAPI, REST APIs, Django</p>
+        </div>
+        <div class="card">
+          <h3>Mobile Development</h3>
+          <p>Flutter, Dart, cross-platform applications</p>
+        </div>
+        <div class="card">
+          <h3>Tools & Database</h3>
+          <p>Git, GitHub, MySQL, API integration</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <div class="projects">
+        <div class="card">
+          <h3>REST API Development</h3>
+          <p>
+            Backend API development, request validation,
+            database operations, and integration.
+          </p>
+          <p class="tag">Python · FastAPI · REST</p>
+        </div>
+        <div class="card">
+          <h3>Flutter Mobile App</h3>
+          <p>
+            Cross-platform mobile application development
+            and backend API integration.
+          </p>
+          <p class="tag">Flutter · Dart · APIs</p>
+        </div>
+        <div class="card">
+          <h3>Database-Driven System</h3>
+          <p>
+            Server-side features for managing data,
+            processing requests, and supporting applications.
+          </p>
+          <p class="tag">Python · MySQL</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Let's Connect</h2>
+      <p>
+        I'm interested in Python Backend/API Developer
+        and Flutter Developer opportunities.
+      </p>
+      <p>GitHub: <a href="https://github.com/">My GitHub Profile</a></p>
+      <p>Email: Replace this with your professional email.</p>
+    </section>
+  </main>
+
+  <footer>© 2026 Developer Portfolio</footer>
+</body>
+</html>
